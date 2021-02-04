@@ -39,7 +39,9 @@
 function solution(info, query) {
 
   const data = createData(info);
-  return countData(data, query);
+  const result = countData(data, query);
+
+  return result;
 
 
   function createData(info) {
@@ -49,7 +51,7 @@ function solution(info, query) {
       const parsed = parse(item);
       const props = parsed.slice(0, 4);
       const point = parsed[4] * 1;
-      infoToData(data, props, point);
+      addInfoToData(data, props, point);
     }); 
 
     return data;
@@ -102,7 +104,7 @@ function solution(info, query) {
     return start;
   }
 
-  function infoToData(data, props, point, d = 0, temp = '') {
+  function addInfoToData(data, props, point, d = 0, temp = '') {
     if (d === 4) {
       if (!data[temp]) data[temp] = [];
       data[temp].push(point);
@@ -110,7 +112,7 @@ function solution(info, query) {
     }
 
     [props[d], '-'].forEach(p => {
-      infoToData(data, props, point, d + 1, temp + p);
+      addInfoToData(data, props, point, d + 1, temp + p);
     }); 
   }
 
